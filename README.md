@@ -20,7 +20,7 @@ __Bonus:__ Now with mouse support!
 Install with `npm`:
 
 ``` bash
-npm install keypress
+npm install hearhellacopters/keypress
 ```
 
 Or add it to the `"dependencies"` section of your _package.json_ file.
