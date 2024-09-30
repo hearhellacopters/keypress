@@ -1,7 +1,5 @@
 # keypress
 
-------------
-
 ## Make any Node ReadableStream emit "keypress" events
 
 Previous to Node `v0.8.x`, there was an undocumented `"keypress"` event that
@@ -19,8 +17,6 @@ __Bonus:__ Now with mouse support!
 
 ## Installation
 
-------------
-
 Install with `npm`:
 
 ``` bash
@@ -30,8 +26,6 @@ npm install keypress
 Or add it to the `"dependencies"` section of your _package.json_ file.
 
 Example
-
-------------
 
 ### Listening for "keypress" events
 
@@ -76,8 +70,6 @@ process.on('exit', function () {
 ```
 
 ## License
-
-------------
 
 (The MIT License)
 
