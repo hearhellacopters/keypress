@@ -1,14 +1,15 @@
-keypress
-========
-### Make any Node ReadableStream emit "keypress" events
+# keypress
 
+------------
+
+## Make any Node ReadableStream emit "keypress" events
 
 Previous to Node `v0.8.x`, there was an undocumented `"keypress"` event that
 `process.stdin` would emit when it was a TTY. Some people discovered this hidden
 gem, and started using it in their own code.
 
 Now in Node `v0.8.x`, this `"keypress"` event does not get emitted by default,
-but rather only when it is being used in conjunction with the `readline` (or by
+but rather only when it is being used in conjuction with the `readline` (or by
 extension, the `repl`) module.
 
 This module is the exact logic from the node `v0.8.x` releases ripped out into its
@@ -16,22 +17,23 @@ own module.
 
 __Bonus:__ Now with mouse support!
 
-Installation
+## Installation
+
 ------------
 
 Install with `npm`:
 
 ``` bash
-$ npm install keypress
+npm install keypress
 ```
 
 Or add it to the `"dependencies"` section of your _package.json_ file.
 
-
 Example
--------
 
-#### Listening for "keypress" events
+------------
+
+### Listening for "keypress" events
 
 ``` js
 var keypress = require('keypress');
@@ -73,13 +75,13 @@ process.on('exit', function () {
 });
 ```
 
+## License
 
-License
--------
+------------
 
 (The MIT License)
 
-Copyright (c) 2012 Nathan Rajlich &lt;nathan@tootallnate.net&gt;
+Copyright (c) 2012 [Nathan Rajlich](nathan@tootallnate.net);
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
