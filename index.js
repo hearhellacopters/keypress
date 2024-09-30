@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 
+var { Stream } = require("stream");
 var EventEmitter = require('events').EventEmitter;
 
 /**
@@ -35,7 +36,6 @@ exports = module.exports = keypress;
  * @param {Stream} stream
  * @api public
  */
-
 function keypress(stream) {
   if (isEmittingKeypress(stream)) return;
 
@@ -75,7 +75,6 @@ function keypress(stream) {
  * @return {Boolean} `true` if the stream is emitting "keypress" events
  * @api private
  */
-
 function isEmittingKeypress(stream) {
   var rtn = !!stream._keypressDecoder;
   if (!rtn) {
@@ -103,7 +102,6 @@ function isEmittingKeypress(stream) {
  * @param {Stream} stream writable stream instance
  * @api public
  */
-
 exports.enableMouse = function (stream) {
   stream.write('\x1b[?1000h');
 };
@@ -116,7 +114,6 @@ exports.enableMouse = function (stream) {
  * @param {Stream} stream writable stream instance
  * @api public
  */
-
 exports.disableMouse = function (stream) {
   stream.write('\x1b[?1000l');
 };
@@ -129,7 +126,6 @@ exports.disableMouse = function (stream) {
  * @return {Number} number of listeners for `event`
  * @api public
  */
-
 var listenerCount = EventEmitter.listenerCount;
 if (!listenerCount) {
   listenerCount = function(emitter, event) {
@@ -228,6 +224,15 @@ function emitKey(stream, s) {
     // ctrl+letter
     key.name = String.fromCharCode(s.charCodeAt(0) + 'a'.charCodeAt(0) - 1);
     key.ctrl = true;
+
+  } else if (s.length === 1 && s >= '0' && s <= '9') {
+    // Number
+    key.name = s;
+  
+  } else if (s.length === 1 && '~!@#$%^&*()_+'.indexOf(s) !== -1) {
+    // shift+number
+    key.name = s;
+    key.shift = true;
 
   } else if (s.length === 1 && s >= 'a' && s <= 'z') {
     // lowercase letter
@@ -371,8 +376,8 @@ function emitKey(stream, s) {
     key.name = 'mouse';
     var s = key.sequence;
     var b = s.charCodeAt(3);
-    key.x = s.charCodeAt(4) - 040;
-    key.y = s.charCodeAt(5) - 040;
+    key.x = s.charCodeAt(4) - parseInt('040', 8);
+    key.y = s.charCodeAt(5) - parseInt('040', 8);
 
     key.scroll = 0;
 
